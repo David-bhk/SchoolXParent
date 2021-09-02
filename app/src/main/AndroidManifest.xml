@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.drawer">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="SchoolXParent"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Drawer"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".AdminPanel.MainAdminPanelActivity"></activity>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".timetable.mtwtfs" />
+        <activity android:name=".timetable.timetable" /> <!-- <activity android:name=".timetable.MainActivity" /> -->
+        <activity android:name=".StudentList" />
+        <activity android:name=".userProfile.DeleteAcount" />
+        <activity android:name=".userProfile.ChangePassword" />
+        <activity android:name=".chatf.MainActivity" />
+        <activity android:name=".Result.ResultGrid" />
+        <activity android:name=".studegroth.StudentGroth" />
+        <activity android:name=".studegroth.bar_chart" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".studegroth.PieChartActivty" />
+        <activity
+            android:name=".Result.ResultAdapter"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".Result.ResultModel"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".Result.Result" />
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".Not.Notification" >
+
+        </activity>
+        <activity android:name=".CalendarStuff.School_Calendar" />
+        <activity
+            android:name=".logout"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".joe" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+    </application>
+
+</manifest>

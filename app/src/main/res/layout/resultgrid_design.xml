@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:stretchColumns="1,2,3">
+    <TableRow>
+
+        <TextView
+            android:id="@+id/sub_id"
+            android:layout_column="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="subjects"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/cu_id"
+            android:layout_column="2"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="c.u"
+            android:textAlignment="center"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/marks_id"
+            android:layout_column="3"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="marks"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+    </TableRow>
+
+
+</TableLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/gray"/>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:id="@+id/notification_title"
+                android:text="This is the title"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/notification_description"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:text="This is the title"
+                android:textSize="18dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
