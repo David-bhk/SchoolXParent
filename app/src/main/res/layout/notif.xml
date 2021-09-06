@@ -5,7 +5,15 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="kk" />
+        android:layout_height="match_parent"
+        android:text="het"
+        android:layout_margin="50dp"></TextView>
+    <TextView
+        android:layout_marginBottom="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="het"
+
+       ></TextView>
 
 </RelativeLayout>

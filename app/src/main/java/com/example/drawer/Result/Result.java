@@ -118,12 +118,16 @@ public class Result extends AppCompatActivity {
 
                     }
 
-//                    SharedPreferences sharedPref = getSharedPreferences(null, Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPref.edit();
-//                    editor.putInt("Term1", avg);
+                    SharedPreferences sharedPref2 = getSharedPreferences(null, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor2 = sharedPref2.edit();
+                    editor2.putInt("Term1", avg);
 //                    editor.putInt("Term2", avg);
-//
-//                    editor.apply();
+//                    editor.putInt("Term3", avg);
+//                    editor.putInt("Term4", avg);
+//                    editor.putInt("Term5", avg);
+//                    editor.putInt("Term6", avg);
+
+                    editor2.apply();
 
                 } else {
                     //progress bar visibility GONE
@@ -142,64 +146,4 @@ public class Result extends AppCompatActivity {
         });
 
     }
-
-//    private void getParentChildren(){
-//        List<String> coursesList=new ArrayList<>();
-//        List<String> coursesMarks=new ArrayList<>();
-//        List<String> children=new ArrayList<>();
-//        CollectionReference reference= FirebaseFirestore.getInstance().collection("Users").
-//                document(myId).collection("children");
-//        reference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-//            @Override
-//            public void onEvent( QuerySnapshot value,  FirebaseFirestoreException error) {
-//                for (DocumentSnapshot snapshots:value.getDocuments()){
-//                    String studentId=snapshots.getId();
-//
-//                    Log.d("mydata", studentId);
-//                    DatabaseReference reference1=FirebaseDatabase.getInstance().getReference("Students");
-//                    reference1.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//
-//                            Long c=snapshot.getChildrenCount();
-//                            Log.d("mydata", c.toString());
-//                            for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-//                                reference1.child(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//
-//                                        for (DataSnapshot dataSnapshot1:snapshot.getChildren()){
-//                                             courseCodes=dataSnapshot1.getKey();
-//                                             courseMarks=dataSnapshot1.getValue().toString();
-//
-//                                             coursesList.add(courseCodes);
-//                                             coursesMarks.add(courseMarks);
-//                                        }
-//
-//                                        Log.d("coursecodes", coursesList.toString());
-//                                        Log.d("coursecodes", coursesMarks.toString());
-//                                    }
-//
-//                                    @Override
-//                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//                                    }
-//                                });
-//                            }
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//                            Log.d("mydata", error.getMessage());
-//                            Toast.makeText(Result.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//
-//                }
-//            }
-//        });
-//    }
-
-
 }

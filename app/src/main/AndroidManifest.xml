@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Drawer"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AdminPanel.MainAdminPanelActivity"></activity>
+        <activity android:name=".AdminPanel.MainAdminPanelActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -29,12 +29,13 @@
         <activity android:name=".chatf.MainActivity" />
         <activity android:name=".Result.ResultGrid" />
         <activity android:name=".studegroth.StudentGroth" />
-        <activity android:name=".studegroth.bar_chart" >
+        <activity android:name=".studegroth.bar_chart">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".studegroth.PieChartActivty" />
         <activity
@@ -53,9 +54,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Not.Notification" >
-
-        </activity>
+        <activity android:name=".Not.Notification"></activity>
         <activity android:name=".CalendarStuff.School_Calendar" />
         <activity
             android:name=".logout"
@@ -71,11 +70,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".joe" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 
 </manifest>

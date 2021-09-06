@@ -1,39 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="3dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_baseline_delete_24"
+        android:id="@+id/delete"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        tools:ignore="RtlCompat" />
 
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+    <LinearLayout android:layout_height="80dp"
+        android:layout_width="match_parent"
         android:padding="10dp"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/gray"/>
+        <com.felipecsl.gifimageview.library.GifImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/mynot"
+            android:adjustViewBounds="true"
+            android:layout_centerInParent="true"
+            />
 
         <LinearLayout
+            android:layout_width="322dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="10dp"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
+            >
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
                 android:id="@+id/notification_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="This is the title"
-                android:textStyle="bold"
-                android:textSize="25sp"
                 android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 />
+
             <TextView
                 android:id="@+id/notification_description"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="wrap_content"
                 android:text="This is the title"
                 android:textSize="18dp"
                 />
+
         </LinearLayout>
+
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

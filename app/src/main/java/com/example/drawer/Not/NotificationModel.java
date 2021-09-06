@@ -4,14 +4,17 @@ public class NotificationModel {
     String id;
     String title;
     String content;
+    String docId;
 
     public NotificationModel() {
     }
 
-    public NotificationModel(String id, String title, String content) {
+
+    public NotificationModel(String id, String title, String content, String docId) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.docId = docId;
     }
 
     public String getId() {
@@ -36,5 +39,13 @@ public class NotificationModel {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getDocId() {
+        return docId;
+    }
+
+    public void setDocId(String docId) {
+        this.docId = docId;
     }
 }

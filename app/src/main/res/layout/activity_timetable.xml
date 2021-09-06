@@ -8,57 +8,6 @@
         android:layout_height="wrap_content"
         tools:context=".timetable.timetable">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/l"-->
-<!--        android:layout_width="40dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:src="@drawable/fy"-->
-<!--        android:layout_centerVertical="true"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_weight="1"-->
-<!--        />-->
-<!--        <ImageView-->
-<!--            android:id="@+id/m"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:src="@drawable/fa"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_weight="1"/>-->
-<!--        <ImageView-->
-<!--            android:id="@+id/mr"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:src="@drawable/fe"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_weight="1"/>-->
-<!--        <ImageView-->
-<!--            android:id="@+id/j"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:src="@drawable/fi"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_weight="1"/>-->
-<!--        <ImageView-->
-<!--            android:id="@+id/v"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:src="@drawable/fo"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_weight="1"/>-->
-<!--        <ImageView-->
-<!--            android:id="@+id/s"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:src="@drawable/fu"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_weight="1"/>-->
-
-
         <ScrollView
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_width="match_parent"

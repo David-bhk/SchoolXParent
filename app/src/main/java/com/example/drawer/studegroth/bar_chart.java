@@ -3,6 +3,7 @@ package com.example.drawer.studegroth;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -22,6 +23,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,12 +34,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class bar_chart extends AppCompatActivity {
-     DatabaseReference database;
-     //ProgressBar progressBar;
-     //ArrayList<ResultModel> list;
-     //com.example.drawer.Result.ResultAdapter resultAdapter;
-     //RecyclerView recyclerView;
-     private String id;
+    DatabaseReference database;
+    //ProgressBar progressBar;
+    //ArrayList<ResultModel> list;
+    //com.example.drawer.Result.ResultAdapter resultAdapter;
+    //RecyclerView recyclerView;
+    private String id;
+    int avg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,70 +49,90 @@ public class bar_chart extends AppCompatActivity {
         BarChart chart = findViewById(R.id.barchart);
 
 
-//        SharedPreferences sharedPref = getSharedPreferences(null, Context.MODE_PRIVATE);
-//
-////        int term2 = sharedPref.getInt("Term2", 0);
-//
-//        int term1 = sharedPref.getInt("Term1", 0);
+        SharedPreferences sharedPref = getSharedPreferences(null, Context.MODE_PRIVATE);
+        avg = sharedPref.getInt("avg", 0);
+
 //        int term2 = sharedPref.getInt("Term2", 0);
+
+        int term1 = sharedPref.getInt("term1", 0);
+
+                    SharedPreferences sharedPref2 = getSharedPreferences(null, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor2 = sharedPref2.edit();
+                    editor2.putInt("term1", avg);
+                    editor2.apply();
+
+
+//        SharedPreferences sharedPref1 = getSharedPreferences(null, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPref1.edit();
+//        editor.putInt("Term1", avg);
+
+//        editor.apply();
+        ArrayList<BarEntry> information=new ArrayList<>();
+        information.add(new BarEntry(1,term1));
+        information.add(new BarEntry(2,60));
+        information.add(new BarEntry(3,90));
+        information.add(new BarEntry(4,17));
+        information.add(new BarEntry(5,75));
+        information.add(new BarEntry(6,80));
+//        information.add(new BarEntry(2016,1000));
+//        information.add(new BarEntry(2017,1700));
+//        information.add(new BarEntry(2018,1900));
+//        information.add(new BarEntry(2019,2200));
+
+        BarDataSet dataset=new BarDataSet(information,"Report");
+        dataset.setValueTextColor(Color.BLACK);
+        dataset.setValueTextSize(15f);
+
+        BarData barData=new BarData(dataset);
+
+        chart.setFitBars(true);
+        chart.setData(barData);
+        chart.getDescription().setText("Student's Bar Report");
+        chart.animateY(2000);
+
 
 //        ArrayList NoOfEmp = new ArrayList();
 //
-//        NoOfEmp.add(new BarEntry(90, 0));
-//        NoOfEmp.add(new BarEntry(78, 1));
-//        NoOfEmp.add(new BarEntry(30, 2));
-//        NoOfEmp.add(new BarEntry(40, 3));
-//        NoOfEmp.add(new BarEntry(50, 4));
-//        NoOfEmp.add(new BarEntry(60, 5));
-
-
-//        ArrayList year = new ArrayList();
+//        NoOfEmp.add(new BarEntry(0, 70));
+//        NoOfEmp.add(new BarEntry(0, 80));
 //
-//        year.add("Term1");
-//        year.add("Term2");
-//        year.add("Sem1");
-//        year.add("Term3");
-//        year.add("Term4");
-//        year.add("Sem2");
-
-        Intent w = getIntent();
-        String term = w.getStringExtra("term");
 
 
-        // get student Id
-        SharedPreferences sharedPref = getSharedPreferences(null, Context.MODE_PRIVATE);
-        id = sharedPref.getString("id", null);
 
-        database = FirebaseDatabase.getInstance().getReference("Results").child(id); //get all the items  soit in incrementing or in a list or loop
-
-        ResultModel resultModel1 = new ResultModel("Subjects", "C.U.", "Marks", "id");
-
-        database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
-                    //progressBar.setVisibility(View.GONE);
-                    int total = 0;
-                    int count = 0;
-                    int GPA = 0;
-                    //list.clear();
-                    List<BarEntry> barEntries = new ArrayList<>();
-
-                    String Term1 =dataSnapshot.child("Term1").child("jd").child("marks").getValue().toString();
-                    String Term12 =dataSnapshot.child("Term1").child("ji").child("marks").getValue().toString();
-                    String Term2 =dataSnapshot.child("Term2").child("jii").child("marks").getValue().toString();
-                    String Term3 =dataSnapshot.child("Term3").child("jiii").child("marks").getValue().toString();
-                    String Term4 =dataSnapshot.child("Term4").child("jiii").child("marks").getValue().toString();
-                    String Term5 =dataSnapshot.child("Term5").child("jiii").child("marks").getValue().toString();
-                    String Term6 =dataSnapshot.child("Term6").child("jiiii").child("marks").getValue().toString();
-                    Float moyenne=Float.parseFloat(Term1)+Float.parseFloat(Term12);
-
-                    barEntries.add(new BarEntry(Integer.parseInt("11"), moyenne/2));
-                    barEntries.add(new BarEntry(Integer.parseInt("21"), Integer.parseInt(Term2)));
-                    barEntries.add(new BarEntry(Integer.parseInt("31"), Integer.parseInt(Term3)));
-                    barEntries.add(new BarEntry(Integer.parseInt("41"), Integer.parseInt(Term4)));
-                    barEntries.add(new BarEntry(Integer.parseInt("51"), Integer.parseInt(Term5)));
-                    barEntries.add(new BarEntry(Integer.parseInt("61"), Integer.parseInt(Term6)));
+//         get student Id
+//        SharedPreferences sharedPref = getSharedPreferences(null, Context.MODE_PRIVATE);
+//        id = sharedPref.getString("id", null);
+//
+//        database = FirebaseDatabase.getInstance().getReference("Results").child(id); //get all the items  soit in incrementing or in a list or loop
+//
+//        ResultModel resultModel1 = new ResultModel("Subjects", "C.U.", "Marks", "id");
+//
+//        database.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.hasChildren()) {
+//                    //progressBar.setVisibility(View.GONE);
+//                    int total = 0;
+//                    int count = 0;
+//                    int GPA = 0;
+//                    //list.clear();
+//                    List<BarEntry> barEntries = new ArrayList<>();
+//
+//                    String Term1 =dataSnapshot.child("Term1").child("jd").child("marks").getValue().toString();
+//                    String Term12 =dataSnapshot.child("Term1").child("ji").child("marks").getValue().toString();
+//                    String Term2 =dataSnapshot.child("Term2").child("jii").child("marks").getValue().toString();
+//                    String Term3 =dataSnapshot.child("Term3").child("jiii").child("marks").getValue().toString();
+//                    String Term4 =dataSnapshot.child("Term4").child("jiii").child("marks").getValue().toString();
+//                    String Term5 =dataSnapshot.child("Term5").child("jiii").child("marks").getValue().toString();
+//                    String Term6 =dataSnapshot.child("Term6").child("jiiii").child("marks").getValue().toString();
+//                    Float moyenne=Float.parseFloat(Term1)+Float.parseFloat(Term12);
+//
+//                    barEntries.add(new BarEntry(Integer.parseInt("11"), moyenne/2));
+//                    barEntries.add(new BarEntry(Integer.parseInt("21"), Integer.parseInt(Term2)));
+//                    barEntries.add(new BarEntry(Integer.parseInt("31"), Integer.parseInt(Term3)));
+//                    barEntries.add(new BarEntry(Integer.parseInt("41"), Integer.parseInt(Term4)));
+//                    barEntries.add(new BarEntry(Integer.parseInt("51"), Integer.parseInt(Term5)));
+//                    barEntries.add(new BarEntry(Integer.parseInt("61"), Integer.parseInt(Term6)));
 
 
 //                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
@@ -121,9 +144,9 @@ public class bar_chart extends AppCompatActivity {
 //                        }
 
 
-                       // list.add(resultModel);
+        // list.add(resultModel);
 
-                        //String marks = resultModel1.getMarks();
+        //String marks = resultModel1.getMarks();
 //                        resultModel1.setMarks(resultModel.getMarks());
 //                        resultModel1.setId(resultModel.getId());
 //
@@ -136,13 +159,14 @@ public class bar_chart extends AppCompatActivity {
 //                        int marks1 = Integer.parseInt(marks);
 //                        total += marks1;
 //                        count++;
-                 //   }
+        //   }
 
-                    BarDataSet bardataset = new BarDataSet(barEntries, "Student Average");
-                    chart.animateY(2000);
-                    BarData data = new BarData(bardataset);
-                    chart.setData(data);
-
+//        BarDataSet bardataset = new BarDataSet(NoOfEmp, "Student Average");
+//        chart.animateY(1000);
+//        BarData data = new BarData(bardataset);
+//        chart.setData(data);
+    }
+}
 
                     //resultAdapter = new ResultAdapter(bar_chart.this, list);
                     //recyclerView.setAdapter(resultAdapter);
@@ -167,7 +191,7 @@ public class bar_chart extends AppCompatActivity {
 //                        Toast.makeText(bar_chart.this, "unaChindwa", Toast.LENGTH_SHORT).show();
 //
 //                    }
-
+//
 //                    SharedPreferences sharedPref = getSharedPreferences(null, Context.MODE_PRIVATE);
 //                    SharedPreferences.Editor editor = sharedPref.edit();
 //                    editor.putInt("Term1", avg);
@@ -175,18 +199,18 @@ public class bar_chart extends AppCompatActivity {
 //
 //                    editor.apply();
 
-                } else {
-                    Toast.makeText(bar_chart.this, "No Data!", Toast.LENGTH_SHORT).show();
-                }
+//                } else {
+//                    Toast.makeText(bar_chart.this, "No Data!", Toast.LENGTH_SHORT).show();
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
 
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-}

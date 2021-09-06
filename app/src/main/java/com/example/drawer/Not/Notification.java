@@ -55,6 +55,7 @@ public class Notification extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
                     notificationModel = dataSnapshot.getValue(NotificationModel.class);
                     notificationModelList.add(notificationModel);
                 }
@@ -87,20 +88,6 @@ public class Notification extends AppCompatActivity {
 
             }
         });
-
-//        FirebaseMessaging.getInstance().subscribeToTopic("weather")
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        String msg = "Done";
-//                        if (!task.isSuccessful()) {
-//                            msg = "Failed";
-//                            return;
-//                        }
-//
-//                    }
-//                });
-
 
     }
 

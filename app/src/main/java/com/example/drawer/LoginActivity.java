@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.drawer.AdminPanel.MainAdminPanelActivity;
+import com.example.drawer.Not.Notification;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -114,7 +116,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                             String username = snapshot.child("username").getValue().toString();
                                             Toast.makeText(LoginActivity.this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
-                                        } else
+                                        }
+                                        else if (snapshot.child("accountType").getValue().equals("Admin")){
+                                            Intent intToHome = new Intent(LoginActivity.this, MainAdminPanelActivity.class);
+                                            startActivity(intToHome);
+                                            finish();
+                                        }
+                                        else
                                             Toast.makeText(LoginActivity.this, "Your are not a parent", Toast.LENGTH_SHORT).show();
                                     }
 
