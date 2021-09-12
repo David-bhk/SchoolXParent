@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         studGroth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, lec.class));
+                startActivity(new Intent(MainActivity.this, StudentGroth.class));
 
             }
         });
