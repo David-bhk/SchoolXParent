@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,8 +25,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.example.drawer.CalendarStuff.School_Calendar;
 import com.example.drawer.Not.Notification;
-import com.example.drawer.lecturers.lec;
-import com.example.drawer.studegroth.StudentGroth;
+import com.example.drawer.studegroth.bar_chart;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,7 +38,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Tag;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -63,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CardView timetable;
     CardView calendar;
     CardView studGroth;
-   int ACTION_PICK = 10001;
+    int ACTION_PICK = 10001;
     TextView textView11, textView12;
     String id;
     CircleImageView profile;
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //    private FirebaseStorage storage;
 //    private StorageReference storageReference;
 
-//HERE WE WANT TO SPECIALIZE WHICH ACCOUNT TO STATRT
+    //HERE WE WANT TO SPECIALIZE WHICH ACCOUNT TO STATRT
     @Override
     protected void onStart() {
         super.onStart();
@@ -114,18 +111,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         chat = (CardView) findViewById(R.id.cardView3);
 
 
-        floatingActionButton.setOnClickListener ( new View.OnClickListener () {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSupportChat ();
+                startSupportChat();
             }
-        } );
+        });
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (intent.resolveActivity(getPackageManager()) !=null){
+                if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, ACTION_PICK);
                 }
 //                Intent i=new Intent(Intent.ACTION_PICK);
@@ -160,7 +157,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         studGroth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, StudentGroth.class));
+                Intent b = new Intent(getApplicationContext(), bar_chart.class);
+                startActivity(b);
 
             }
         });
@@ -175,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+
     //impletemeting whatsAppinthe app
     private void startSupportChat() {
 
@@ -183,11 +182,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String bodyMessageFormal = "I have an issue with the App so i wanted you guys to help me.";// Replace with your message.
             String whatsappContain = headerReceiver + bodyMessageFormal;
             String trimToNumner = "+256754888626"; //10 digit number
-            Intent intent = new Intent ( Intent.ACTION_VIEW );
-            intent.setData ( Uri.parse ( "https://wa.me/" + trimToNumner + whatsappContain ) );
-            startActivity ( intent );
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://wa.me/" + trimToNumner + whatsappContain));
+            startActivity(intent);
         } catch (Exception e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
 
     }
@@ -222,22 +221,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ACTION_PICK)
+        if (requestCode == ACTION_PICK)
 //            && resultCode==RESULT_OK)
-                      {
-                          switch (resultCode){
-                              case RESULT_OK:
-                                  Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                                  profile.setImageBitmap(bitmap);
-                                  handleUpload(bitmap);
+        {
+            switch (resultCode) {
+                case RESULT_OK:
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    profile.setImageBitmap(bitmap);
+                    handleUpload(bitmap);
 
-                          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                          if (user.getPhotoUrl() !=null){
-                              Glide.with(this)
-                                      .load(user.getPhotoUrl())
-                                      .into(profile);
-                          }}
+                    if (user.getPhotoUrl() != null) {
+                        Glide.with(this)
+                                .load(user.getPhotoUrl())
+                                .into(profile);
+                    }
+            }
 
 //            Uri uri=data.getData();
 //            StorageReference filepath= mStorage.child("Images").child(uri.getLastPathSegment());
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void handleUpload(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         StorageReference reference = FirebaseStorage.getInstance().getReference()
                 .child("profileImages")
@@ -280,19 +280,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
     }
-    private void getDownloadUrl(StorageReference reference){
+
+    private void getDownloadUrl(StorageReference reference) {
         reference.getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Log.d(TAG, "onSuccess: " + uri );
+                        Log.d(TAG, "onSuccess: " + uri);
                         setUserProfileUrl(uri);
                     }
                 });
 
     }
 
-    private void setUserProfileUrl(Uri uri){
+    private void setUserProfileUrl(Uri uri) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        if (user.getPhotoUrl() != null){
 //            Glide.with(this)
@@ -321,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu2, menu);
@@ -348,8 +350,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseAuth.getInstance().signOut();
         Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, LoginActivity.class);
-       startActivity(intent);
-       finishAffinity();
+        startActivity(intent);
+        finishAffinity();
     }
 
     @Override

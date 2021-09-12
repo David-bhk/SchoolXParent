@@ -116,13 +116,11 @@ public class LoginActivity extends AppCompatActivity {
 
                                             String username = snapshot.child("username").getValue().toString();
                                             Toast.makeText(LoginActivity.this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
-                                        }
-                                        else if (snapshot.child("accountType").getValue().equals("Admin")){
+                                        } else if (snapshot.child("accountType").getValue().equals("Admin")) {
                                             Intent intToHome = new Intent(LoginActivity.this, MainAdminPanelActivity.class);
                                             startActivity(intToHome);
                                             finish();
-                                        }
-                                        else
+                                        } else
                                             Toast.makeText(LoginActivity.this, "Your are not a parent", Toast.LENGTH_SHORT).show();
                                     }
 
@@ -131,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                     }
                                 });
-
 
 
                             }
@@ -204,4 +201,16 @@ public class LoginActivity extends AppCompatActivity {
             // No user is signed in
         }
     }*/
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            Intent intToHome = new Intent(this, StudentList.class);
+            startActivity(intToHome);
+            finish();
+        }
+    }
 }

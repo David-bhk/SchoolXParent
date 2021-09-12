@@ -8,9 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#888</color>
-    <color name="blue">#0000FF</color>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="textInput">#718bff</color>
+    <color name="colorPrimary">#FFFF</color>
+    <color name="colorPrimaryDark">#1B2559</color>
     <color name="colorAccent">#009688</color>
     <color name="colorAccentb">#FF9462EC</color>
     <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">

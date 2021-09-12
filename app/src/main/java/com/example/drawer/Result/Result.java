@@ -102,24 +102,23 @@ public class Result extends AppCompatActivity {
 //                etGPA.setText("Average: " + avg);
                     //setting condition for the etGPA
                     if (avg >= 50 && avg <= 65) {
-                        etGPA.setText("GPA: " + " b");}
-                        else if (avg >= 66 && avg <= 75) {
-                            etGPA.setText("GPA: " + " B+");
+                        etGPA.setText("GPA: " + " b");
+                    } else if (avg >= 66 && avg <= 75) {
+                        etGPA.setText("GPA: " + " B+");
                     } else if (avg >= 80 && avg <= 88) {
                         etGPA.setText("GPA: " + "A");
 
-                    }
-                    else if (avg >= 89 && avg <= 95) {
+                    } else if (avg >= 89 && avg <= 95) {
                         etGPA.setText("GPA: " + "A+");
 
-                    }else {
+                    } else {
                         etGPA.setText("GPA: " + " D");
                         Toast.makeText(Result.this, "You Have Failed", Toast.LENGTH_SHORT).show();
 
                     }
 
                     SharedPreferences sharedPref1 = getSharedPreferences(null, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor1= sharedPref1.edit();
+                    SharedPreferences.Editor editor1 = sharedPref1.edit();
                     editor1.putInt("Term1", avg);
                     editor1.putInt("term2", avg);
                     editor1.putInt("term3", avg);

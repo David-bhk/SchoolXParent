@@ -156,7 +156,7 @@ public class CommunicationRecyclerAdapter extends RecyclerView.Adapter<Communica
                 linear.setGravity(Gravity.CENTER|Gravity.END);
                 linear2.setGravity(Gravity.CENTER|Gravity.END);
                 message.setTextColor(context.getResources().getColor(android.R.color.white));
-                cardView.setCardBackgroundColor(context.getResources().getColor(R.color.blue));
+                cardView.setCardBackgroundColor(context.getResources().getColor(R.color.textInput));
             }
 
         }

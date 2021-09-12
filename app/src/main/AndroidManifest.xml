@@ -29,9 +29,7 @@
         <activity android:name=".userProfile.ChangePassword" />
         <activity android:name=".chatf.MainActivity" />
         <activity android:name=".Result.ResultGrid"></activity>
-        <activity android:name=".studegroth.StudentGroth" />
         <activity android:name=".studegroth.bar_chart" />
-        <activity android:name=".studegroth.PieChartActivty" />
         <activity
             android:name=".Result.ResultAdapter"
             tools:ignore="Instantiatable" />

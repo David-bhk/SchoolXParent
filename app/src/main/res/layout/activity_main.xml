@@ -305,8 +305,8 @@
             android:layout_marginRight="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:src="@drawable/weeee"
-            android:background="@color/purple_200"
+            android:src="@drawable/whatsapp"
+            android:background="@color/white"
 
              />
 
