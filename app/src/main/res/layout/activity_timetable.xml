@@ -11,12 +11,15 @@
         <ScrollView
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/black">
 
             <LinearLayout
                 android:id="@+id/frame_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -37,6 +40,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:clickable="true"
+                        android:background="@color/main"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <RelativeLayout
@@ -91,7 +95,7 @@
                                 android:layout_height="75dp"
                                 android:layout_below="@id/imageView3"
                                 android:layout_centerHorizontal="true"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginTop="10dp"
                                 android:text="Tuesday" />
                         </RelativeLayout>
 

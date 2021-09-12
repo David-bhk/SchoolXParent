@@ -1,5 +1,7 @@
 package com.example.drawer.timetable;
 
+import com.example.drawer.lecturers.LecModel;
+
 public class User {
 
     String start, end, cN;

@@ -118,16 +118,16 @@ public class Result extends AppCompatActivity {
 
                     }
 
-                    SharedPreferences sharedPref2 = getSharedPreferences(null, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor2 = sharedPref2.edit();
-                    editor2.putInt("Term1", avg);
-//                    editor.putInt("Term2", avg);
-//                    editor.putInt("Term3", avg);
-//                    editor.putInt("Term4", avg);
-//                    editor.putInt("Term5", avg);
-//                    editor.putInt("Term6", avg);
+                    SharedPreferences sharedPref1 = getSharedPreferences(null, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor1= sharedPref1.edit();
+                    editor1.putInt("Term1", avg);
+                    editor1.putInt("term2", avg);
+                    editor1.putInt("term3", avg);
+                    editor1.putInt("term4", avg);
+                    editor1.putInt("term5", avg);
+                    editor1.putInt("term6", avg);
 
-                    editor2.apply();
+                    editor1.apply();
 
                 } else {
                     //progress bar visibility GONE

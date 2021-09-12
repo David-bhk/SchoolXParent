@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.drawer.R;
 
 public class ResultGrid extends AppCompatActivity {
-    Button button1, button2, button3, button4, button5, button6;
 
+    AppCompatButton button1, button2, button3, button4, button5, button6;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

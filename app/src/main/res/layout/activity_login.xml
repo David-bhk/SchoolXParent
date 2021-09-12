@@ -16,11 +16,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/input_text"
-        android:hint="Email"
+        android:hint="Email your email"
         android:padding="10dp" />
     <com.google.android.material.textfield.TextInputLayout
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#FF9462EC"
+        app:passwordToggleTint="#62c3e3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -41,14 +41,14 @@
 
     <TextView
         android:id="@+id/forgot"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
+        android:layout_marginLeft="85dp"
         android:layout_marginTop="10dp"
         android:padding="10dp"
+        android:fontFamily="monospace"
         android:text="Forgot password?"
         android:textSize="20dp" />
-
 
     <Button
         android:id="@+id/login"
@@ -57,6 +57,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
+        android:fontFamily="monospace"
         android:background="@drawable/button_login"
         android:text="Login" />
     <ProgressBar

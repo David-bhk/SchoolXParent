@@ -21,11 +21,12 @@ import com.github.mikephil.charting.charts.BarChart;
 
             btnBarChart = (Button) findViewById(R.id.btnBarChart);
             btnPieChart = (Button) findViewById(R.id.btnPieChart);
+
             btnBarChart.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    Intent I = new Intent(StudentGroth.this, bar_chart.class);
-                    startActivity(I);
+                public void onClick(View v) {
+                    Intent b = new Intent(StudentGroth.this, bar_chart.class);
+                    startActivity(b);
                 }
             });
             btnPieChart.setOnClickListener(new View.OnClickListener() {

@@ -6,31 +6,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="@color/white"
     tools:context=".Result.ResultGrid">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Child's Results"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:fontFamily="monospace"
+        android:text="MY CHILD'S RESULTS"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/oneperiod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/button_login"
-        android:text="1ST term"
-        android:textSize="18sp"
+        android:fontFamily="monospace"
+        android:text="First Period "
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
-    <Button
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/twoperiod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,35 +43,44 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/button_login"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:fontFamily="monospace"
+        android:text="Second Period"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:text="SECOND TERM" />
-    <Button
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Fisrtsem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/white"
         android:background="@drawable/button_login"
-        android:text="First sem exams" />
-    <Button
+        android:fontFamily="monospace"
+        android:text="First sem exams"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Threeperiod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/white"
         android:background="@drawable/button_login"
-        android:text="third term" />
-    <Button
+        android:fontFamily="monospace"
+        android:text="Third Period"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Fourperiod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,11 +88,14 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/button_login"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:fontFamily="monospace"
+        android:text="Fourth Period"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:text="Fourth term" />
-    <Button
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/ndsem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,9 +103,11 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/button_login"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:fontFamily="monospace"
+        android:text="Lsst Sem Exams"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:text="LAst sem exams" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

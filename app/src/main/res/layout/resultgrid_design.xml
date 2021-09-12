@@ -8,6 +8,7 @@
     <TableRow>
 
         <TextView
+            android:background="@color/main"
             android:id="@+id/sub_id"
             android:layout_column="1"
             android:gravity="center"
@@ -17,6 +18,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:background="@color/main"
             android:id="@+id/cu_id"
             android:layout_column="2"
             android:gravity="center"
@@ -27,6 +29,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:background="@color/main"
             android:id="@+id/marks_id"
             android:layout_column="3"
             android:gravity="center"

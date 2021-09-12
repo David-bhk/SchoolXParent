@@ -1,6 +1,7 @@
 package com.example.drawer.AdminPanel;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +11,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.drawer.LoginActivity;
 import com.example.drawer.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 public class MainAdminPanelActivity extends AppCompatActivity {
-    Button add_notification;
+    Button add_notification, AdminLogout;
     EditText notification_title;
     EditText notification_content;
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications");
@@ -35,6 +38,7 @@ public class MainAdminPanelActivity extends AppCompatActivity {
         add_notification = findViewById(R.id.add_notification);
         notification_title = findViewById(R.id.notification_title);
         notification_content = findViewById(R.id.notification_content);
+        AdminLogout = findViewById(R.id.AdminLogout);
 
         add_notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,5 +68,20 @@ public class MainAdminPanelActivity extends AppCompatActivity {
                 });
             }
         });
+        AdminLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+
+            private void logout() {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(MainAdminPanelActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainAdminPanelActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finishAffinity();
+            }
+        });
+
     }
 }

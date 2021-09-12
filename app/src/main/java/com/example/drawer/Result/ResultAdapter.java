@@ -38,7 +38,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
             ResultModel resultModel = resultModelList.get(position);
             if (holder.getPosition()==0){
-                holder.itemView.setBackgroundColor(Color.parseColor("#FFBB86FC"));
+                holder.itemView.setBackgroundColor(Color.parseColor("#62c3e3"));
             }
         else if (holder.getPosition()%2!=0)holder.itemView.setVisibility(View.VISIBLE);
         else holder.itemView.setVisibility(View.GONE);

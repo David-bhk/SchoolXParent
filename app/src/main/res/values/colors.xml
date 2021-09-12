@@ -17,6 +17,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <color name="main">#62c3e3</color>
+    <color name="back2">#6c8d85</color>
+    <color name="mcolor">#0BA8F1</color>
+
 
 
 

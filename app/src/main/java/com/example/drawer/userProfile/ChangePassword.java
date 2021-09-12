@@ -29,8 +29,8 @@ public class ChangePassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        editText1 = findViewById(R.id.password1);
-//        editText2 = findViewById(R.id.password2);
+        editText1 = findViewById(R.id.newp);
+        editText2 = findViewById(R.id.acient);
         change = findViewById(R.id.changeP);
         dialog =new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -51,6 +51,7 @@ public class ChangePassword extends AppCompatActivity {
                                         firebaseAuth.signOut();
                                         finish();
                                         Intent i = new Intent(ChangePassword.this, MainActivity.class);
+                                        editText2.setText("");
                                     }
                                     else {
                                         dialog.dismiss();

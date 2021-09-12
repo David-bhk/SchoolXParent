@@ -2,8 +2,11 @@ package com.example.drawer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,22 +26,33 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.example.drawer.CalendarStuff.School_Calendar;
 import com.example.drawer.Not.Notification;
+import com.example.drawer.lecturers.lec;
 import com.example.drawer.studegroth.StudentGroth;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Tag;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.ByteArrayOutputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = null;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -48,11 +63,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CardView timetable;
     CardView calendar;
     CardView studGroth;
-    //    FrameLayout frameLayout;
+   int ACTION_PICK = 10001;
     TextView textView11, textView12;
     String id;
     CircleImageView profile;
     private FirebaseAuth auth;
+    StorageReference mStorage;
 //    ImageView prof;
 //    private Uri imageUri;
 //    private FirebaseStorage storage;
@@ -81,23 +97,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         floatingActionButton = findViewById(R.id.fab);
 
         auth = FirebaseAuth.getInstance();
-
-        /*Intent intent = new Intent(this, StudentList.class);
-        startActivity(intent);*/
-
-//        prof = (ImageView) findViewById(R.id.profile);
-//        storage = FirebaseStorage.getInstance();
-//        storageReference = storage.getReference();
-//
-//        prof.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_SCREEN_ON, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-////                intent.setType("image/*");
-//                startActivityForResult(intent,1);
-//            }
-//        });
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         textView11 = (TextView) headerView.findViewById(R.id.emailHeader);
@@ -114,11 +113,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         home = findViewById(R.id.cardview5);
         chat = (CardView) findViewById(R.id.cardView3);
 
-        /*Intent w = getIntent();
-        id = w.getStringExtra("id");
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();*/
-
-        // SETTING ONCLICK LISTENER TO THE FLOATING BUTTON
 
         floatingActionButton.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -127,8 +121,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } );
 
-
-
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) !=null){
+                    startActivityForResult(intent, ACTION_PICK);
+                }
+//                Intent i=new Intent(Intent.ACTION_PICK);
+//                i.setType("image/*");
+//                startActivity(i);
+            }
+        });
 
         setSupportActionBar(toolbar);
         getUserInfo();
@@ -156,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         studGroth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, StudentGroth.class));
+                startActivity(new Intent(MainActivity.this, lec.class));
 
             }
         });
@@ -213,24 +217,110 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
-
-       /* DocumentReference reference=FirebaseFirestore.getInstance().collection("Users").document(auth.getUid());
-
-        reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent( DocumentSnapshot value, FirebaseFirestoreException error) {
-               textView11.setText(value.get("email").toString());
-               textView12.setText(value.get("username").toString());
-               try {
-                   Glide.with(getApplicationContext()).load(value.get("profile"));
-               }catch (Exception e){
-                   Toast.makeText(MainActivity.this, ""+e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-               }
-
-            }
-        });*/
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ACTION_PICK)
+//            && resultCode==RESULT_OK)
+                      {
+                          switch (resultCode){
+                              case RESULT_OK:
+                                  Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                                  profile.setImageBitmap(bitmap);
+                                  handleUpload(bitmap);
+
+                          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                          if (user.getPhotoUrl() !=null){
+                              Glide.with(this)
+                                      .load(user.getPhotoUrl())
+                                      .into(profile);
+                          }}
+
+//            Uri uri=data.getData();
+//            StorageReference filepath= mStorage.child("Images").child(uri.getLastPathSegment());
+//            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    taskSnapshot.getMetadata().getReference().getDownloadUrl()
+//                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+//
+//                                @Override
+//                                public void onSuccess(Uri uri) {
+////                                   newStu.child("image").setValue(uri);
+//
+//                                }
+//                            });
+//                }
+//            });
+        }
+    }
+
+    private void handleUpload(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, byteArrayOutputStream);
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        StorageReference reference = FirebaseStorage.getInstance().getReference()
+                .child("profileImages")
+                .child(uid + ".jpeg");
+        reference.putBytes(byteArrayOutputStream.toByteArray())
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        getDownloadUrl(reference);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Log.e(TAG, "onFailure: ", e.getCause());
+                    }
+                });
+
+    }
+    private void getDownloadUrl(StorageReference reference){
+        reference.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d(TAG, "onSuccess: " + uri );
+                        setUserProfileUrl(uri);
+                    }
+                });
+
+    }
+
+    private void setUserProfileUrl(Uri uri){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user.getPhotoUrl() != null){
+//            Glide.with(this)
+//                    .load(user.getPhotoUrl())
+//                    .into(profile);
+//        }
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(uri)
+                .build();
+        user.updateProfile(request)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(MainActivity.this, "Profile image updated successfully to be changed ... ", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+
+                        Toast.makeText(MainActivity.this, "Profile image failed to be changed ... ", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu2, menu);
@@ -248,18 +338,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, com.example.drawer.userProfile.ChangePassword.class));
 
         } else if (id == R.id.LogOut) {
-            Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+            logout();
         }
         return true;
     }
 
     private void logout() {
-        auth.signOut();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        FirebaseAuth.getInstance().signOut();
         Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, LoginActivity.class);
+       startActivity(intent);
+       finishAffinity();
     }
 
     @Override

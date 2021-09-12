@@ -86,6 +86,7 @@ public class header extends AppCompatActivity {
         }
     }
 
+
 //    private void uploadPicture() {
 //        final String randomKey = UUID.randomUUID().toString();
 //        StorageReference mountainsRef = storageReference.child("images/" +randomKey);

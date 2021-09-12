@@ -45,7 +45,7 @@ public class DeleteAcount extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder passwordDialog = new AlertDialog.Builder(v.getContext());
                 passwordDialog.setTitle("Delete Account");
-                passwordDialog.setMessage("B");
+                passwordDialog.setMessage("If You Delete Your Account you will not be able to login");
 
                 passwordDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override

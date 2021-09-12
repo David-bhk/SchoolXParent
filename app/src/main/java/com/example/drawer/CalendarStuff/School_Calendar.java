@@ -1,113 +1,72 @@
 package com.example.drawer.CalendarStuff;
-
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Build;
+import androidx.appcompat.app.AppCompatActivity;;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.drawer.CalendarStuff.CalendarAdapter;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import com.example.drawer.R;
-
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
-public class School_Calendar extends AppCompatActivity implements CalendarAdapter.OnItemListener
+public class School_Calendar extends AppCompatActivity
 {
-    private TextView monthYearText;
-    private RecyclerView calendarRecyclerView;
-    private LocalDate selectedDate;
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    ProgressBar progressBar;
+    SwipeRefreshLayout swipe;
+    private WebView mywebview;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_calendar);
-        initWidgets();
-        selectedDate = LocalDate.now();
-        setMonthView();
-    }
-
-    private void initWidgets()
-    {
-        calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
-        monthYearText = findViewById(R.id.monthYearTV);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void setMonthView()
-    {
-        monthYearText.setText(monthYearFromDate(selectedDate));
-        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
-
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
-        calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarRecyclerView.setAdapter(calendarAdapter);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private ArrayList<String> daysInMonthArray(LocalDate date)
-    {
-        ArrayList<String> daysInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
-
-        int daysInMonth = yearMonth.lengthOfMonth();
-
-        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-        for(int i = 1; i <= 42; i++)
-        {
-            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-            {
-                daysInMonthArray.add("");
+        mywebview = (WebView) findViewById(R.id.webView);
+        progressBar = findViewById(R.id.lookCalendar);
+        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        LoadWeb();
+        progressBar.setMax(100);
+        progressBar.setProgress(1);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mywebview.reload();
             }
-            else
-            {
-                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
+        });
+        mywebview.setWebChromeClient(new WebChromeClient(){
+            public void onProgressChanged(WebView view, int progress) {
+                progressBar.setProgress(progress);
             }
-        }
-        return  daysInMonthArray;
-    }
+        });
+        mywebview.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                mywebview.loadUrl("https://muhindo-galien.github.io/calender/");
+            }
+            public void onLoadResource(WebView view, String url) { //Doesn't work
+                //swipe.setRefreshing(true);
+            }
+            public void onPageFinished(WebView view, String url) {
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private String monthYearFromDate(LocalDate date)
-    {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        return date.format(formatter);
+                progressBar.setVisibility(View.GONE);
+                swipe.setRefreshing(false);
+            }
+        });
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void previousMonthAction(View view)
-    {
-        selectedDate = selectedDate.minusMonths(1);
-        setMonthView();
+    public void LoadWeb() {
+        mywebview = (WebView) findViewById(R.id.webView);
+        mywebview.getSettings().setJavaScriptEnabled(true);
+        mywebview.getSettings().setAppCacheEnabled(true);
+        mywebview.loadUrl("https://muhindo-galien.github.io/calender/");
+        swipe.setRefreshing(true);
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void nextMonthAction(View view)
-    {
-        selectedDate = selectedDate.plusMonths(1);
-        setMonthView();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onItemClick(int position, String dayText)
-    {
-        if(!dayText.equals(""))
-        {
-            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    public void onBackPressed() {
+        if (mywebview.canGoBack()) {
+            mywebview.goBack();
+        } else {
+            finish();
         }
     }
 }
