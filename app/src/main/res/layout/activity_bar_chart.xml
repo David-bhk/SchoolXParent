@@ -27,7 +27,7 @@
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Per 3"/>
+        android:text="Sem1"/>
     <TextView
         android:textColor="@color/main"
         android:layout_marginRight="20dp"
@@ -44,7 +44,7 @@
         android:textColor="@color/main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Per 6"/>
+        android:text="Sem 2"/>
 </LinearLayout>
 
     <com.github.mikephil.charting.charts.BarChart

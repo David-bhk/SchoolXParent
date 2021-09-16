@@ -120,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Intent intToHome = new Intent(LoginActivity.this, MainAdminPanelActivity.class);
                                             startActivity(intToHome);
                                             finish();
+                                            btnSignIn.setEnabled(true);
 
                                         } else
                                             Toast.makeText(LoginActivity.this, "Your are not a parent", Toast.LENGTH_SHORT).show();

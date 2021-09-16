@@ -5,15 +5,15 @@
     app:cardElevation="3dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_baseline_delete_24"
-        android:id="@+id/delete"
-        android:layout_gravity="right"
-        android:layout_marginTop="10dp"
-        android:textAlignment="center"
-        tools:ignore="RtlCompat" />
+<!--    <ImageView-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:src="@drawable/ic_baseline_delete_24"-->
+<!--        android:id="@+id/delete"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:textAlignment="center"-->
+<!--        tools:ignore="RtlCompat" />-->
 
     <LinearLayout android:layout_height="80dp"
         android:layout_width="match_parent"

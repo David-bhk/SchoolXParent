@@ -37,6 +37,7 @@
        android:layout_marginLeft="8dp"
        android:paddingTop="0dp"
        android:layout_marginTop="50dp"
-       android:layout_marginRight="8dp" />
+       android:layout_marginRight="8dp"
+       tools:listitem="@layout/notification_layout"/>
 
 </RelativeLayout>

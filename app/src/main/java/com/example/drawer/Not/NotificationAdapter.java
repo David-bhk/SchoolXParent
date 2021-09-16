@@ -52,17 +52,17 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.notification_title.setText(notificationModel.title);
         holder.notification_description.setText(notificationModel.content);
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications");
-                notificationModelList.remove(NotificationAdapter.this.toString());
-                notifyDataSetChanged();
-                notificationModelList.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, notificationModelList.size());
-            }
-        });
+//        holder.imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications");
+//                notificationModelList.remove(NotificationAdapter.this.toString());
+//                notifyDataSetChanged();
+//                notificationModelList.remove(position);
+//                notifyItemRemoved(position);
+//                notifyItemRangeChanged(position, notificationModelList.size());
+//            }
+//        });
 
     }
 
@@ -73,12 +73,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public class viewHolder extends RecyclerView.ViewHolder {
         TextView notification_title ,notification_description;
-        ImageView imageView;
+//        ImageView imageView;
         public viewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             notification_title=itemView.findViewById(R.id.notification_title);
             notification_description=itemView.findViewById(R.id.notification_description);
-            imageView=itemView.findViewById(R.id.delete);
+//            imageView=itemView.findViewById(R.id.delete);
         }
     }
 }
