@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Login Error, Please Login Again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Login Error, check your credential or you network", Toast.LENGTH_SHORT).show();
 
                             } else {
                                 progressBar.setVisibility(View.VISIBLE);
@@ -120,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Intent intToHome = new Intent(LoginActivity.this, MainAdminPanelActivity.class);
                                             startActivity(intToHome);
                                             finish();
+
                                         } else
                                             Toast.makeText(LoginActivity.this, "Your are not a parent", Toast.LENGTH_SHORT).show();
                                     }

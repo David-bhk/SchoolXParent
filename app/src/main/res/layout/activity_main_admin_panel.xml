@@ -4,10 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AdminPanel.MainAdminPanelActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tab"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:id="@+id/message"
+            android:text="Messages"
+            android:background="@drawable/button_login"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/notifications"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:text="Send Notification"
+            android:background="@drawable/button_login"/>
+
+    </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:orientation="vertical"
+        android:layout_below="@+id/tab"
+        android:id="@+id/notificationtab"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -42,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_notification"
             android:layout_marginTop="50dp"
             android:text="Send Notification"
@@ -51,7 +81,7 @@
             android:textAllCaps="false"
             android:background="@drawable/button_login"
             android:layout_marginHorizontal="20dp"/>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/AdminLogout"
             android:layout_marginTop="25dp"
             android:textAllCaps="false"
@@ -62,6 +92,20 @@
             android:layout_marginHorizontal="20dp"/>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/messageView"
+        android:layout_below="@+id/tab">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerView"
+            android:layout_margin="8dp"
+            tools:listitem="@layout/user_tile"
+            />
     </LinearLayout>
 
 </RelativeLayout>

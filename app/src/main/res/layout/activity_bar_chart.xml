@@ -8,91 +8,44 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
     <TextView
+        android:textColor="@color/main"
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Term1"/>
+        android:text="Per 1"/>
     <TextView
+        android:textColor="@color/main"
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Term2"/>
+        android:text="Per 2"/>
     <TextView
+        android:textColor="@color/main"
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Term3"/>
+        android:text="Per 3"/>
     <TextView
+        android:textColor="@color/main"
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Term4"/>
+        android:text="Per 4"/>
     <TextView
+        android:textColor="@color/main"
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Term5"/>
+        android:text="Per 5"/>
     <TextView
+        android:textColor="@color/main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Term6"/>
+        android:text="Per 6"/>
 </LinearLayout>
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_marginTop="10dp">-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv1"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Term1 :"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv2"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:layout_marginRight="20dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Term2 :"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv3"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:layout_marginRight="20dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Term3 :"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv4"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:layout_marginRight="20dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Term4 :"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv5"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:layout_marginRight="20dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Term5 ;"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv6"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Term6 :"-->
-<!--            android:fontFamily="monospace"-->
-<!--            />-->
-<!--    </LinearLayout>-->
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barchart"

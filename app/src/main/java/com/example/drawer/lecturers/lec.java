@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -39,57 +40,54 @@ public class lec extends AppCompatActivity {
     private com.example.drawer.lecturers.lecAdapter lecAdapter;
     private ProgressBar progressBar;
     private String id;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lec);
-        recyclerView = findViewById(R.id.userList);
+        recyclerView = findViewById(R.id.MyRecycle2);
         progressBar = findViewById(R.id.go);
+        button = findViewById(R.id.contact);
         // get student Id
         SharedPreferences sharedPref = getSharedPreferences(null, Context.MODE_PRIVATE);
         id = sharedPref.getString("id", null);
 
-        recyclerView = findViewById(R.id.MyRecycle);
+        recyclerView = findViewById(R.id.MyRecycle2);
         progressBar = findViewById(R.id.go);
         progressBar.setVisibility(View.VISIBLE);
 
         auth = FirebaseAuth.getInstance();
         myId = auth.getCurrentUser().getUid();
-        database = FirebaseDatabase.getInstance().getReference("lectures").child(id).child("maths");
-       recyclerView.setHasFixedSize(true);
-       recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        database = FirebaseDatabase.getInstance().getReference("lectures").child(id);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(lec.this));
 
         list = new ArrayList<>();
-        recyclerView.setAdapter(lecAdapter);
 
-        lecAdapter = new lecAdapter(this,list);
-//        recyclerView.setAdapter(lecAdapter);
         list.clear();
         database.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()){
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         progressBar.setVisibility(View.GONE);
-                        LecModel user1 = dataSnapshot.getValue(LecModel.class);
-                        list.add(user1);
+                        LecModel rest = snapshot.getValue(LecModel.class);
+                        list.add(rest);
+                        lecAdapter = new lecAdapter(lec.this, list);
+
                     }
                     lecAdapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(lecAdapter);
                 }
                 else {
-//                    Toast.makeText( "No data ....", Toast.LENGTH_SHORT).show();
                     Toast.makeText(lec.this, "No Lectures available ...", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
 
                 }
                 }
-
-
-
             @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }

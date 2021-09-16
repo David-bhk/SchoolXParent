@@ -14,12 +14,13 @@
         android:id="@+id/go"
         android:layout_gravity="center"
         />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MyRecycle2"
-        android:touchscreenBlocksFocus="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:touchscreenBlocksFocus="true"
+        tools:listitem="@layout/lecmodel">
 
     </androidx.recyclerview.widget.RecyclerView>
 

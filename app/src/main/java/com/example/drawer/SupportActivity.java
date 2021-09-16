@@ -1,4 +1,8 @@
-package com.example.drawer.chatf;
+package com.example.drawer;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,13 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.drawer.AdminPanel.MainAdminPanelActivity;
-import com.example.drawer.R;
 import com.example.drawer.chatf.adapter.CommunicationRecyclerAdapter;
 import com.example.drawer.chatf.model.dataCommunication;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +23,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,8 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
-    //DECLARING VARIABLES
+public class SupportActivity extends AppCompatActivity {
     EditText sendMessage;
     FloatingActionButton fab_send;
     RecyclerView recyclerView;
@@ -48,30 +50,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        setContentView(R.layout.mainmessage);
+        setContentView(R.layout.activity_support);
 
         context = this;
         sendMessage = findViewById(R.id.sendMessage);
         fab_send = findViewById(R.id.fab_send);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //GETTING THE EXTRA WHICH  IS THE USER ID
 
-        Intent intent = getIntent();
-        userId = intent.getStringExtra("userId");
+        Intent intent=getIntent();
+        userId=intent.getStringExtra("userId");
         fab_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 inputMessage();
             }
         });
-
         sendDataMessageShow();
-
     }
 //
 //    @Override
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(intent);
 //            finish();
 //        }
-//        Intent intent=new Intent(this, com.example.drawer.MainActivity.class);
+//        Intent intent=new Intent(this, MainActivity.class);
 //        intent.putExtra("userID",FirebaseAuth.getInstance().getCurrentUser().getUid());
 //        startActivity(intent);
 //        finish();
@@ -92,71 +88,70 @@ public class MainActivity extends AppCompatActivity {
 
     private void inputMessage() {
         String send = sendMessage.getText().toString();
-        if (send.isEmpty()) {
+        if (send.isEmpty()){
             //SETTING ENTER A MESSAGE AS HINT TEXT IN THE EDITTEXT
             sendMessage.setError("Enter a message");
             sendMessage.requestFocus();
 
-        } else {
+        }else {
 
             String id = userId;
 
             Locale locale = new Locale("en", "ID");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy", locale);
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Accounts").child(userId);
+            DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Accounts").child(userId);
 
             reference.addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                                    name = snapshot.child("username").getValue().toString();
-                                                }
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    name=snapshot.child("username").getValue().toString();
+                    //WE'RE CREATING THIS CHILD CALLED message in firebase
+                    database.child("support").child(userId)
+                            .push()
+                            .setValue(new dataCommunication(
+                                    FirebaseAuth.getInstance().getCurrentUser().getUid(),
+                                    name,
+                                    send,
+                                    simpleDateFormat.format(System.currentTimeMillis()),
+                                    System.currentTimeMillis(),
+                                    "text"))
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //if the message is successfully sent
+                                    Toast.makeText(context, "message sent successfully", Toast.LENGTH_SHORT).show();
+                                    sendMessage.setText("");
 
-                                                @Override
-                                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                                                }
-                                            }
-            );
-//WE'RE CREATING THIS CHILD CALLED message in firebase
-            database.child("message")
-                    .push()
-                    .setValue(new dataCommunication(
-                            userId,
-                            name,
-                            send,
-                            simpleDateFormat.format(System.currentTimeMillis()),
-                            System.currentTimeMillis(),
-                            "text"))
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onSuccess(Void aVoid) {
-                            //if the message is successfully sent
-                            Toast.makeText(context, "message sent successfully", Toast.LENGTH_SHORT).show();
-                            sendMessage.setText("");
+                        public void onFailure(@NonNull Exception e) {
+                            //if the message fail to be sent
+                            Toast.makeText(context, "message failed to send", Toast.LENGTH_SHORT).show();
 
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
+                    });
+                }
+
                 @Override
-                public void onFailure(@NonNull Exception e) {
-                    //if the message fail to be sent
-                    Toast.makeText(context, "message failed to send", Toast.LENGTH_SHORT).show();
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                 }
             });
+
         }
 
     }
 
     private void sendDataMessageShow() {
-        database.child("message").addValueEventListener(new ValueEventListener() {
+        database.child("support").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listCommunication.clear();
                 listData.clear();
-                listData.add("");
-                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                for(DataSnapshot item : dataSnapshot.getChildren()){
                     dataCommunication communication = item.getValue(dataCommunication.class);
-                    listData.add(communication != null ? communication.getDate() : null);
+                    listData.add(communication != null ? communication.getDate(): null);
                     listCommunication.add(communication);
                 }
                 //assigning to the adapter

@@ -6,29 +6,33 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/lauc"
         android:label="SchoolXParent"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/lauc"
         android:supportsRtl="true"
         android:theme="@style/Theme.Drawer"
         android:usesCleartextTraffic="true">
+        <activity android:name=".SupportActivity"></activity>
         <activity android:name=".lecturers.lec"></activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".AdminPanel.MainAdminPanelActivity" />
+        <activity android:name=".AdminPanel.MainAdminPanelActivity">
+
+        </activity>
         <activity android:name=".timetable.mtwtfs" />
-        <activity android:name=".timetable.timetable"></activity>
+        <activity android:name=".timetable.timetable" />
         <activity android:name=".StudentList" />
         <activity android:name=".userProfile.DeleteAcount" />
         <activity android:name=".userProfile.ChangePassword" />
         <activity android:name=".chatf.MainActivity" />
-        <activity android:name=".Result.ResultGrid"></activity>
+        <activity android:name=".Result.ResultGrid" />
         <activity android:name=".studegroth.bar_chart" />
         <activity
             android:name=".Result.ResultAdapter"
@@ -53,9 +57,6 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
-            android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,10 +65,16 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
         <activity android:name=".joe" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
         </activity>
     </application>
 

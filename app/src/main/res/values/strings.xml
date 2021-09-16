@@ -28,4 +28,6 @@
     <string name="StartFrom">Start from: </string>
     <string name="EndAT">End at: </string>
     <string name="Course">Course: </string>
+    <string name="prompt_email">prompt_email</string>
+    <string name="prompt_password">prompt_password</string>
 </resources>

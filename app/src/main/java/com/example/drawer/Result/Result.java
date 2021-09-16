@@ -51,7 +51,6 @@ public class Result extends AppCompatActivity {
         recyclerView = findViewById(R.id.MyRecycle);
         progressBar = findViewById(R.id.go);
         progressBar.setVisibility(View.VISIBLE);
-        //here we're creating a child called Result, id uder Results, and Term++
         database = FirebaseDatabase.getInstance().getReference("Results").child(id).child("Term" + term);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -76,10 +75,8 @@ public class Result extends AppCompatActivity {
 
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         ResultModel resultModel = dataSnapshot1.getValue(ResultModel.class);
-
                         list.add(resultModel1);
                         list.add(resultModel);
-
 
                         String marks = resultModel.getMarks();
                         int marks1 = Integer.parseInt(marks);

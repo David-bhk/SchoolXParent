@@ -6,39 +6,82 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.drawer.LoginActivity;
 import com.example.drawer.R;
+import com.example.drawer.chatf.model.dataCommunication;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainAdminPanelActivity extends AppCompatActivity {
-    Button add_notification, AdminLogout;
+    AppCompatButton add_notification, AdminLogout;
     EditText notification_title;
     EditText notification_content;
+    AppCompatButton notifications,message;
+    RecyclerView recyclerView;
+    MessagesAdapter messagesAdapter;
+    LinearLayout messageView,notificationtab;
+    ArrayList<String> listString;
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_admin_panel);
-
+notifications=findViewById(R.id.message);
+        message=findViewById(R.id.notifications);
+        notificationtab=findViewById(R.id.notificationtab);
+        messageView=findViewById(R.id.messageView);
         add_notification = findViewById(R.id.add_notification);
         notification_title = findViewById(R.id.notification_title);
         notification_content = findViewById(R.id.notification_content);
+        listString=new ArrayList<>();
         AdminLogout = findViewById(R.id.AdminLogout);
+        recyclerView=findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+////        notifications.setBackgroundColor(getResources().getColor(R.color.main));
+//        message.setBackgroundColor(getResources().getColor(R.color.main));
+//        notifications.setBackgroundResource(R.color.main);
+
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                messageView.setVisibility(View.GONE);
+                notificationtab.setVisibility(View.VISIBLE);
+
+            }
+        });
+        notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                messageView.setVisibility(View.VISIBLE);
+                notificationtab.setVisibility(View.GONE);
+            }
+        });
+
+
 
         add_notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +100,6 @@ public class MainAdminPanelActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         dialog.dismiss();
-                        Toast.makeText(MainAdminPanelActivity.this, "Notification Sent", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -82,6 +124,47 @@ public class MainAdminPanelActivity extends AppCompatActivity {
                 finishAffinity();
             }
         });
+        messages();
 
     }
+//        @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        //HERE WE WANT TO GET BACK ONCE IN THE MAIN ACTIVITY ONCE THE USER HAS PRESSED BACK
+//        if (FirebaseAuth.getInstance().getCurrentUser().getUid().startsWith("6YT")){
+//            Intent intent=new Intent(this, MainAdminPanelActivity.class);
+//            intent.putExtra("userID",FirebaseAuth.getInstance().getCurrentUser().getUid());
+//            startActivity(intent);
+//            finish();
+//        }
+//        Intent intent=new Intent(this, MainActivity.class);
+//        intent.putExtra("userID",FirebaseAuth.getInstance().getCurrentUser().getUid());
+//        startActivity(intent);
+//        finish();
+//    }
+    private void messages(){
+
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("support");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                listString.clear();
+               for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                   listString.add(dataSnapshot.getKey());
+               }
+               messagesAdapter=new MessagesAdapter(MainAdminPanelActivity.this,listString);
+               recyclerView.setAdapter(messagesAdapter);
+            }
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        MainAdminPanelActivity.this.finishAffinity();
+    }
+
 }

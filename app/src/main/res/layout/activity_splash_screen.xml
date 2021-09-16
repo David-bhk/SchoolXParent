@@ -5,12 +5,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main"
+    android:background="@color/white"
     android:scaleType="fitXY"
-
     tools:context=".SplashScreen">
 
 
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:src="@drawable/grad"-->
+<!--        android:layout_centerInParent="true">-->
+<!--    </ImageView>-->
+
+    <TextView
+        android:id="@+id/titleC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Welcome"
+        android:textSize="30dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="125dp"
+        android:textColor="@color/main">
+
+    </TextView>
+    <TextView
+        android:id="@+id/titleA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="SchoolXParents"
+        android:textSize="45dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/main">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/titleB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="App"
+        android:textSize="30dp"
+        android:layout_marginLeft="280dp"
+        android:textColor="@color/main"
+        android:layout_below="@+id/titleA">
+
+
+    </TextView>
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="250dp"

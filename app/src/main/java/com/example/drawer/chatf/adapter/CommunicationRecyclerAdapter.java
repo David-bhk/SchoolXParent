@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -42,7 +44,7 @@ public class CommunicationRecyclerAdapter extends RecyclerView.Adapter<Communica
     Context context;
     List<dataCommunication> listCommunication;
     List<String> listData;
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference("Accounts");
 
 //EMPTY CONSTRUCTOR
     public CommunicationRecyclerAdapter() {
@@ -66,15 +68,34 @@ public class CommunicationRecyclerAdapter extends RecyclerView.Adapter<Communica
 
     @Override
     public void onBindViewHolder(@NonNull communicationViewHolder holder, int position) {
-        //int plus = position + 1;
-        //dataCommunication itemPlus = listCommunication.get(position);
+//        int plus = position + 1;
+//        dataCommunication itemPlus = listCommunication.get(plus);
         String itemData = listData.get(position);
 //SETTING THE DATE IN THE CHAT
         dataCommunication itemNormal = listCommunication.get(position);
         Date date = new Date();
+//        Calendar calendar = Calendar.getInstance();
         Locale locale = new Locale("in", "ID");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy", locale);
         long yesterday = date.getTime() - (1000 * 60 * 60 * 24);
+
+
+            database.child(itemNormal.getKey()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    try {
+                        Glide.with(context).load(dataSnapshot.child("profile").getValue().toString()).placeholder(R.drawable.profile).into(holder.imageView);
+                    }catch (Exception e){
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
         if (itemNormal.getDate().equals(itemData)){
             holder.linearDate.setVisibility(View.GONE);
@@ -87,7 +108,7 @@ public class CommunicationRecyclerAdapter extends RecyclerView.Adapter<Communica
         }else{
             holder.textDate.setText(itemNormal.getDate());
         }
-            holder.binView(listCommunication.get(position));
+            binView(listCommunication.get(position),holder);
     }
 
     @Override
@@ -115,50 +136,40 @@ public class CommunicationRecyclerAdapter extends RecyclerView.Adapter<Communica
             linear2 = itemView.findViewById(R.id.linear2);
         }
 
-        public void  binView(dataCommunication dataCommunication) {
 
-            Locale locale = new Locale("in", "ID");
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa", locale);
+    }
+    public void  binView(dataCommunication dataCommunication, communicationViewHolder holder) {
 
-            de.setText(dataCommunication.getDe());
-            message.setText(dataCommunication.getMessage());
-            time.setText(simpleDateFormat.format(dataCommunication.getTime()));
+        Locale locale = new Locale("in", "ID");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa", locale);
+
+        holder.de.setText(dataCommunication.getDe());
+        holder.message.setText(dataCommunication.getMessage());
+        holder.time.setText(simpleDateFormat.format(dataCommunication.getTime()));
 
 //THE USER SHOULD BE IN THIS COLLECTION IN FIREBASE FIRESTORE DATABASE
-            DocumentReference reference = FirebaseFirestore.getInstance().collection("Users")
-                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent( DocumentSnapshot value,FirebaseFirestoreException error) {
-                    String srcImage = value.get("profile").toString();
-                    Glide.with(context).load(srcImage).placeholder(R.drawable.profile).into(imageView);
-                }
-            });
-
-
-//            database.child("login").child(dataCommunication.getKey()).addValueEventListener(new ValueEventListener() {
+//            DocumentReference reference = FirebaseFirestore.getInstance().collection("Users")
+//                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//            reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 //                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    String srcImage = dataSnapshot.child("image").getValue(String.class);
-//                    Glide.with(context).load(srcImage).placeholder(R.drawable.profile).into(imageView);
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
+//                public void onEvent( DocumentSnapshot value,FirebaseFirestoreException error) {
+//                   try {
+//                       String srcImage = value.get("profile").toString();
+//                       Glide.with(context).load(srcImage).placeholder(R.drawable.profile).into(imageView);
+//                   }catch (Exception e){
+//                       Toast.makeText(context, "User Profile is null", Toast.LENGTH_SHORT).show();
+//                   }
 //                }
 //            });
 
-            if (dataCommunication.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-                de.setVisibility(View.GONE);
-                imageView.setVisibility(View.GONE);
-                linear.setGravity(Gravity.CENTER|Gravity.END);
-                linear2.setGravity(Gravity.CENTER|Gravity.END);
-                message.setTextColor(context.getResources().getColor(android.R.color.white));
-                cardView.setCardBackgroundColor(context.getResources().getColor(R.color.textInput));
-            }
-
+        if (dataCommunication.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+            holder.de.setVisibility(View.GONE);
+            holder.imageView.setVisibility(View.GONE);
+            holder.linear.setGravity(Gravity.CENTER|Gravity.END);
+            holder.linear2.setGravity(Gravity.CENTER|Gravity.END);
+            holder.message.setTextColor(context.getResources().getColor(android.R.color.white));
+            holder.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.textInput));
         }
+
     }
 }

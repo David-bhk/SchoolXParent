@@ -26,8 +26,11 @@ import com.bumptech.glide.Glide;
 import com.example.drawer.CalendarStuff.School_Calendar;
 import com.example.drawer.Not.Notification;
 import com.example.drawer.studegroth.bar_chart;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,12 +42,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -54,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Toolbar toolbar;
     FloatingActionButton floatingActionButton;
+    //    ExtendedFloatingActionButton extendedFloatingActionButton;
+//    TextView lec_text;
+//    TextView Support_text;
+//    Boolean isAllFabsVisible;
     CardView notification;
     CardView home;
     CardView chat;
@@ -64,12 +74,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView textView11, textView12;
     String id;
     CircleImageView profile;
-    private FirebaseAuth auth;
     StorageReference mStorage;
-//    ImageView prof;
-//    private Uri imageUri;
-//    private FirebaseStorage storage;
-//    private StorageReference storageReference;
+    private FirebaseAuth auth;
 
     //HERE WE WANT TO SPECIALIZE WHICH ACCOUNT TO STATRT
     @Override
@@ -91,7 +97,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         floatingActionButton = findViewById(R.id.fab);
+//        floatingActionButton1 = findViewById(R.id.lec);
+//        extendedFloatingActionButton = findViewById(R.id.add);
+//        lec_text = findViewById(R.id.fab_text);
+//        Support_text = findViewById(R.id.lec_text);
+//
+//        floatingActionButton.setVisibility(View.GONE);
+//        floatingActionButton1.setVisibility(View.GONE);
+//        lec_text.setVisibility(View.GONE);
+//        Support_text.setVisibility(View.GONE);
+//
+//        isAllFabsVisible = false;
+//
+//        extendedFloatingActionButton.shrink();
+//        extendedFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!isAllFabsVisible){
+//                    floatingActionButton.show();
+//                    floatingActionButton1.show();
+//                    lec_text.setVisibility(View.VISIBLE);
+//                    Support_text.setVisibility(View.VISIBLE);
+//
+//                    extendedFloatingActionButton.extend();
+//                    isAllFabsVisible = true;
+//                }else {
+//                    floatingActionButton.hide();
+//                    floatingActionButton1.hide();
+//                    lec_text.setVisibility(View.GONE);
+//                    Support_text.setVisibility(View.GONE);
+//
+//                    isAllFabsVisible = false;
+//                }
+//            }
+//        });
 
         auth = FirebaseAuth.getInstance();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -114,9 +155,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSupportChat();
+               // startSupportChat();
+                Intent intent=new Intent(MainActivity.this, SupportActivity.class);
+                intent.putExtra("userId",auth.getCurrentUser().getUid());
+                intent.putExtra("support",true);
+                startActivity(intent);
             }
         });
+//        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this, com.example.drawer.lecturers.lec.class));
+//
+//            }
+//        });
+
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,61 +318,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         StorageReference reference = FirebaseStorage.getInstance().getReference()
                 .child("profileImages")
                 .child(uid + ".jpeg");
-        reference.putBytes(byteArrayOutputStream.toByteArray())
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        getDownloadUrl(reference);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        Log.e(TAG, "onFailure: ", e.getCause());
-                    }
-                });
+        Task upload=reference.putBytes(byteArrayOutputStream.toByteArray()).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull @NotNull UploadTask.TaskSnapshot snapshot) {
+                Toast.makeText(MainActivity.this, "uploading", Toast.LENGTH_SHORT).show();
+            }
+        }).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+               if (task.isSuccessful()){
+                   Toast.makeText(MainActivity.this, "upload Complete", Toast.LENGTH_SHORT).show();
+                   return reference.getDownloadUrl();
+               }else {
+                   Toast.makeText(MainActivity.this, "they was an error uploading ", Toast.LENGTH_SHORT).show();
+                   throw task.getException();
+               }
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    String url = (task.getResult()).toString();
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("profile",url);
 
-    }
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Accounts");
+                    databaseReference.child(auth.getCurrentUser().getUid()).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Accounts").child(auth.getUid());
+                            ref.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                    try {
+                                        Glide.with(getApplicationContext())
+                                                .load(snapshot.child("profile").getValue().toString())
+                                                .centerCrop()
+                                                .placeholder(R.drawable.ic_launcher_foreground)
+                                                .into(profile);
 
-    private void getDownloadUrl(StorageReference reference) {
-        reference.getDownloadUrl()
-                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Log.d(TAG, "onSuccess: " + uri);
-                        setUserProfileUrl(uri);
-                    }
-                });
+                                    } catch (Exception e) {
+//                    Toast.makeText(MainActivity.this, "" + e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
-    }
+                                @Override
+                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-    private void setUserProfileUrl(Uri uri) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user.getPhotoUrl() != null){
-//            Glide.with(this)
-//                    .load(user.getPhotoUrl())
-//                    .into(profile);
-//        }
-        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
-                .setPhotoUri(uri)
-                .build();
-        user.updateProfile(request)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(MainActivity.this, "Profile image updated successfully to be changed ... ", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            Toast.makeText(MainActivity.this,"profile updated", Toast.LENGTH_SHORT).show();
+                            //   textView11.setText(taskSnapshot.getUploadSessionUri().getPath());
 
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-
-                        Toast.makeText(MainActivity.this, "Profile image failed to be changed ... ", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+                        }
+                    });
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

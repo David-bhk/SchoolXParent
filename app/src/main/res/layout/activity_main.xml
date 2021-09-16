@@ -295,7 +295,20 @@
             </LinearLayout>
         </ScrollView>
 
-
+<!--<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
+<!--    android:id="@+id/add"-->
+<!--    android:layout_width="55dp"-->
+<!--    android:layout_height="55dp"-->
+<!--    tools:ignore="MissingConstraints"-->
+<!--    android:src="@drawable/ic_baseline_add_24"-->
+<!--    android:background="@drawable/round_background"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintRight_toRightOf="parent"-->
+<!--    android:layout_marginBottom="10dp"-->
+<!--    android:layout_marginRight="25dp"-->
+<!--    android:layout_gravity="bottom|end"-->
+<!--    >-->
+<!--</com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -305,10 +318,43 @@
             android:layout_marginRight="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:src="@drawable/whatsapp"
-            android:background="@color/white"
-
+            android:src="@drawable/wii"
+            android:background="@drawable/round_background"
              />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/fab_text"-->
+<!--            android:text="Support"-->
+<!--            android:layout_marginEnd="62dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/fab"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/fab"-->
+<!--            app:layout_constraintTop_toTopOf="@id/fab">-->
+
+<!--        </TextView>-->
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/lec"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="bottom|end"-->
+<!--            app:fabSize="normal"-->
+<!--            android:layout_marginBottom="60dp"-->
+<!--            android:layout_marginRight="-5dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/fab"-->
+<!--            app:layout_constraintRight_toRightOf="@id/fab"-->
+<!--            android:src="@drawable/wii"-->
+<!--            android:background="@drawable/round_background"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/lec_text"-->
+<!--            android:text="Lecturers"-->
+<!--            android:layout_marginEnd="62dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/lec"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/lec"-->
+<!--            app:layout_constraintTop_toTopOf="@id/lec"></TextView>-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
