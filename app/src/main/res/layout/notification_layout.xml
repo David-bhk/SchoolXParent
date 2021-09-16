@@ -22,7 +22,7 @@
         <com.felipecsl.gifimageview.library.GifImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/mynot"
+            android:src="@drawable/lauc"
             android:adjustViewBounds="true"
             android:layout_centerInParent="true"
             />
