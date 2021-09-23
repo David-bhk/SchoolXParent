@@ -40,6 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/menu_35px"
+            app:titleTextColor="@color/TextColor"
             app:title="SchoolXParents" />
 
         <ScrollView

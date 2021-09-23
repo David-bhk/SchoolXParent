@@ -7,7 +7,7 @@
     tools:context=".Not.Notification">
 
    <LinearLayout
-       android:background="@color/purple_200"
+       android:background="@color/TextColor"
        android:id="@+id/linear1"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"

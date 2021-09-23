@@ -49,7 +49,7 @@
             android:textStyle="bold"
             android:textSize="30dp"
 
-            android:textColorHint="@color/gray"
+            android:textColorHint="@color/TextColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"/>
@@ -58,7 +58,7 @@
             android:id="@+id/notification_title"
             android:layout_marginTop="50dp"
             android:hint="add notification title"
-            android:textColorHint="@color/gray"
+            android:textColorHint="@color/TextColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"/>
@@ -67,7 +67,7 @@
             android:id="@+id/notification_content"
             android:layout_marginTop="20dp"
             android:hint="add some content"
-            android:textColorHint="@color/gray"
+            android:textColorHint="@color/TextColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"/>

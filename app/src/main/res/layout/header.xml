@@ -28,7 +28,7 @@
         android:inputType="textEmailAddress"
         android:hint="Text here"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/TextColor"
         android:textSize="18sp" />
 
     <TextView
@@ -39,7 +39,7 @@
         android:fontFamily="sans-serif"
         android:inputType="textEmailAddress"
         android:hint="Text here"
-        android:textColor="@color/black"
+        android:textColor="@color/TextColor"
         android:textSize="14sp" />
 
 </LinearLayout>

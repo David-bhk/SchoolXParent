@@ -3,23 +3,47 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Applic/class/app/app/src/main/res/drawable/backgroundleft.xml" value="0.14635416666666667" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/drawable/backgroundright.xml" value="0.14635416666666667" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/drawable/borders.xml" value="0.14635416666666667" />
         <entry key="..\:/Applic/class/app/app/src/main/res/drawable/button_login.xml" value="0.26666666666666666" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/drawable/input_text.xml" value="0.2703125" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/drawable/selector.xml" value="0.14635416666666667" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_bar2.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_bar_chart.xml" value="0.25052083333333336" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_change_password.xml" value="0.25052083333333336" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_delete_acount.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_joe.xml" value="0.25052083333333336" />
-        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_login.xml" value="0.12760416666666666" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_lec.xml" value="0.25416666666666665" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_logout.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_main_admin_panel.xml" value="0.25052083333333336" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_mtwtfs.xml" value="0.25052083333333336" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_notification.xml" value="0.25416666666666665" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_pie_chart_activty.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_result.xml" value="0.25052083333333336" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_result_grid.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_school_calendar.xml" value="0.12760416666666666" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_splash_screen.xml" value="0.25052083333333336" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_student_growth.xml" value="0.25052083333333336" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_student_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_support.xml" value="0.25416666666666665" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/activity_timetable.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/header.xml" value="0.25052083333333336" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/item.xml" value="0.25052083333333336" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/item_communication.xml" value="0.25416666666666665" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/lecmodel.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/list.xml" value="0.25052083333333336" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/mainmessage.xml" value="0.25052083333333336" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/notification_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/result_item.xml" value="0.25052083333333336" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/resultgrid_design.xml" value="0.25416666666666665" />
         <entry key="..\:/Applic/class/app/app/src/main/res/layout/student_item.xml" value="0.25052083333333336" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/test_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/layout/user_tile.xml" value="0.25416666666666665" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Applic/class/app/app/src/main/res/menu/menu2.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:background="@color/purple_200"
+        android:background="@color/TextColor"
         android:weightSum="10"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
