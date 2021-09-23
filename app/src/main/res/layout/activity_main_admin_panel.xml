@@ -20,6 +20,7 @@
             android:paddingVertical="10dp"
             android:id="@+id/message"
             android:text="Messages"
+            android:textColor="@color/TextColor"
             android:background="@drawable/button_login"/>
         <androidx.appcompat.widget.AppCompatButton
             android:layout_marginLeft="30dp"
@@ -28,6 +29,7 @@
             android:id="@+id/notifications"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
+            android:textColor="@color/TextColor"
             android:text="Send Notification"
             android:background="@drawable/button_login"/>
 
@@ -48,8 +50,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="30dp"
-
-            android:textColorHint="@color/TextColor"
+            android:textColor="@color/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"/>
@@ -58,7 +59,7 @@
             android:id="@+id/notification_title"
             android:layout_marginTop="50dp"
             android:hint="add notification title"
-            android:textColorHint="@color/TextColor"
+            android:textColorHint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"/>
@@ -67,7 +68,7 @@
             android:id="@+id/notification_content"
             android:layout_marginTop="20dp"
             android:hint="add some content"
-            android:textColorHint="@color/TextColor"
+            android:textColorHint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"/>
@@ -76,6 +77,7 @@
             android:id="@+id/add_notification"
             android:layout_marginTop="50dp"
             android:text="Send Notification"
+            android:textColor="@color/TextColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
@@ -86,6 +88,7 @@
             android:layout_marginTop="25dp"
             android:textAllCaps="false"
             android:text="Admin Logout"
+            android:textColor="@color/TextColor"
             android:background="@drawable/button_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
