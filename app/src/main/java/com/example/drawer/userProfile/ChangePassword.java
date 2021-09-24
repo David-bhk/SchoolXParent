@@ -53,17 +53,15 @@ public class ChangePassword extends AppCompatActivity {
                                         Toast.makeText(ChangePassword.this, "Your Password Has Benn Changed Successfully", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                         firebaseAuth.signOut();
-                                        finish();
-                                        Intent i = new Intent(ChangePassword.this, MainActivity.class);
                                         editText1.setText("");
-                                        if (editText1.length()< 8){
+
+                                    if (editText1.length()< 8){
                                             Toast.makeText(ChangePassword.this, "Password should have at least 8 characters", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
+                                        }}
 
                                     else {
                                         dialog.dismiss();
-                                        Toast.makeText(ChangePassword.this, "Your Password Couldn't Be Changed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ChangePassword.this, "Password should have at least 8 characters", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
