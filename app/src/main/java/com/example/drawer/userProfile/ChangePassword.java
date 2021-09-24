@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,28 +16,31 @@ import com.example.drawer.MainActivity;
 import com.example.drawer.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
 public class ChangePassword extends AppCompatActivity {
-    EditText editText1, editText2;
+    EditText editText1;
    FirebaseAuth firebaseAuth;
     ProgressDialog dialog;
-    Button change;
+    androidx.appcompat.widget.AppCompatButton change;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         editText1 = findViewById(R.id.newp);
-        editText2 = findViewById(R.id.acient);
         change = findViewById(R.id.changeP);
         dialog =new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null){
                     dialog.setMessage("Changing Password, Please Wait");
@@ -51,8 +55,12 @@ public class ChangePassword extends AppCompatActivity {
                                         firebaseAuth.signOut();
                                         finish();
                                         Intent i = new Intent(ChangePassword.this, MainActivity.class);
-                                        editText2.setText("");
+                                        editText1.setText("");
+                                        if (editText1.length()< 8){
+                                            Toast.makeText(ChangePassword.this, "Password should have at least 8 characters", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
+
                                     else {
                                         dialog.dismiss();
                                         Toast.makeText(ChangePassword.this, "Your Password Couldn't Be Changed", Toast.LENGTH_SHORT).show();
@@ -70,9 +78,14 @@ public class ChangePassword extends AppCompatActivity {
 //                }
 //            });
 
-                }
 
+                }
             }
+
+//            private void updatePassword(String newPassword, String oldPassword) {
+//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                AuthCredential authCredential = EmailAuthProvider.getCredential()
+//            }
         });
 
 

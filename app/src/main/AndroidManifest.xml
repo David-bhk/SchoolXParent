@@ -25,6 +25,8 @@
 
         <activity android:name=".AdminPanel.MainAdminPanelActivity">
 
+
+
         </activity>
         <activity android:name=".timetable.mtwtfs" />
         <activity android:name=".timetable.timetable" />
@@ -58,16 +60,16 @@
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".joe" />

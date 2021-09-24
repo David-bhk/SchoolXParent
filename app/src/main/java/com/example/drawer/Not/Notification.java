@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +43,7 @@ public class Notification extends AppCompatActivity {
         notification_recycler_view = findViewById(R.id.notification_recycler_view);
         Intent intent = getIntent();
         notificationId = intent.getStringExtra("notificationId");
-
+        notification_recycler_view.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         notification_recycler_view.setHasFixedSize(true);
         notification_recycler_view.setLayoutManager(new LinearLayoutManager(this));

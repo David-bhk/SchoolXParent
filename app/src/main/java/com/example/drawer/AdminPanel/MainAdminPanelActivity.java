@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,6 +72,7 @@ notifications=findViewById(R.id.message);
                 messageView.setVisibility(View.GONE);
                 notificationtab.setVisibility(View.VISIBLE);
 
+
             }
         });
         notifications.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +102,9 @@ notifications=findViewById(R.id.message);
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         dialog.dismiss();
+                        notification_content.setText("");
+                        notification_title.setText("");
+                        Toast.makeText(MainAdminPanelActivity.this, "notification sent Successfully", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -154,6 +159,8 @@ notifications=findViewById(R.id.message);
                }
                messagesAdapter=new MessagesAdapter(MainAdminPanelActivity.this,listString);
                recyclerView.setAdapter(messagesAdapter);
+                recyclerView.addItemDecoration(new DividerItemDecoration(MainAdminPanelActivity.this, LinearLayoutManager.VERTICAL));
+
             }
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {

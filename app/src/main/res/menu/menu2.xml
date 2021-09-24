@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/ChangeProfile"
-        android:title="Change Profile"
+        android:title="Change Password"
         />
     <item
         android:id="@+id/DeletePassword"

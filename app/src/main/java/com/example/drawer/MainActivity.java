@@ -98,42 +98,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        floatingActionButton = findViewById(R.id.fab);
-//        floatingActionButton1 = findViewById(R.id.lec);
-//        extendedFloatingActionButton = findViewById(R.id.add);
-//        lec_text = findViewById(R.id.fab_text);
-//        Support_text = findViewById(R.id.lec_text);
-//
-//        floatingActionButton.setVisibility(View.GONE);
-//        floatingActionButton1.setVisibility(View.GONE);
-//        lec_text.setVisibility(View.GONE);
-//        Support_text.setVisibility(View.GONE);
-//
-//        isAllFabsVisible = false;
-//
-//        extendedFloatingActionButton.shrink();
-//        extendedFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!isAllFabsVisible){
-//                    floatingActionButton.show();
-//                    floatingActionButton1.show();
-//                    lec_text.setVisibility(View.VISIBLE);
-//                    Support_text.setVisibility(View.VISIBLE);
-//
-//                    extendedFloatingActionButton.extend();
-//                    isAllFabsVisible = true;
-//                }else {
-//                    floatingActionButton.hide();
-//                    floatingActionButton1.hide();
-//                    lec_text.setVisibility(View.GONE);
-//                    Support_text.setVisibility(View.GONE);
-//
-//                    isAllFabsVisible = false;
-//                }
-//            }
-//        });
-
         auth = FirebaseAuth.getInstance();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
@@ -143,12 +107,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar1);
-//        frameLayout  =findViewById(R.id.frame_container);
         notification = (CardView) findViewById(R.id.cardview1);
         calendar = findViewById(R.id.cardview4);
         timetable = findViewById(R.id.cardView6);
         studGroth = findViewById(R.id.cardView2);
         home = findViewById(R.id.cardview5);
+        floatingActionButton = findViewById(R.id.fab);
         chat = (CardView) findViewById(R.id.cardView3);
 
 
@@ -162,14 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-//        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(MainActivity.this, com.example.drawer.lecturers.lec.class));
-//
-//            }
-//        });
-
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
