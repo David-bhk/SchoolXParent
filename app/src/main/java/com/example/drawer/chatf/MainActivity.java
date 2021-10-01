@@ -73,22 +73,22 @@ public class MainActivity extends AppCompatActivity {
         sendDataMessageShow();
 
     }
-//
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        //HERE WE WANT TO GET BACK ONCE IN THE MAIN ACTIVITY ONCE THE USER HAS PRESSED BACK
-//        if (FirebaseAuth.getInstance().getCurrentUser().getUid().startsWith("6YT")){
-//            Intent intent=new Intent(this, MainAdminPanelActivity.class);
-//            intent.putExtra("userID",FirebaseAuth.getInstance().getCurrentUser().getUid());
-//            startActivity(intent);
-//            finish();
-//        }
-//        Intent intent=new Intent(this, com.example.drawer.MainActivity.class);
-//        intent.putExtra("userID",FirebaseAuth.getInstance().getCurrentUser().getUid());
-//        startActivity(intent);
-//        finish();
-//    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //HERE WE WANT TO GET BACK ONCE IN THE MAIN ACTIVITY ONCE THE USER HAS PRESSED BACK
+        if (FirebaseAuth.getInstance().getCurrentUser().getUid().startsWith("6YT")){
+            Intent intent=new Intent(this, MainAdminPanelActivity.class);
+            intent.putExtra("userID",FirebaseAuth.getInstance().getCurrentUser().getUid());
+            startActivity(intent);
+            finish();
+        }
+        Intent intent=new Intent(this, com.example.drawer.MainActivity.class);
+        intent.putExtra("userID",FirebaseAuth.getInstance().getCurrentUser().getUid());
+        startActivity(intent);
+        finish();
+    }
 
     private void inputMessage() {
         String send = sendMessage.getText().toString();
