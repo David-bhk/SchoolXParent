@@ -101,12 +101,15 @@ public class bar_chart extends AppCompatActivity {
                     total += marks1;
                     count++;
                 }
-                int avg = total / count;
-
-                information.set(i - 1, new BarEntry(i, avg));
-                dataset.notifyDataSetChanged();
-                barData.notifyDataChanged();
-                chart.notifyDataSetChanged();
+                if (count != 0 ){
+                    int avg = total / count;
+                    information.set(i - 1, new BarEntry(i, avg));
+                    dataset.notifyDataSetChanged();
+                    barData.notifyDataChanged();
+                    chart.notifyDataSetChanged();
+                }else {
+                    Toast.makeText(bar_chart.this, "No Data!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
